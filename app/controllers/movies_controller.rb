@@ -3,13 +3,16 @@
 class MoviesController < ApplicationController
   before_action :authenticate_user!, only: %i[create]
 
-  def index; end
+  def index
+    @movies = Movie.order(created_at: :desc)
+  end
 
   def create
-    @form = Movies::CreateForm.new(movies_create_params)
+    @form = Movies::CreateForm.new(movies_params)
 
     if @form.submit
-      # MovieBroadcastJob.perform_later()
+      movie = current_user.movies.create(movies_params)
+      MovieBroadcastJob.perform_later(current_user, movie)
       flash.now[:success] = t('.success')
     else
       flash.now[:error] = @form.errors.full_messages
@@ -18,7 +21,7 @@ class MoviesController < ApplicationController
 
   private
 
-  def movies_create_params
+  def movies_params
     params.permit(:description, :youtube_url)
   end
 end

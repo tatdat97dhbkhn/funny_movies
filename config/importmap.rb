@@ -10,3 +10,4 @@ pin_all_from 'app/javascript/controllers', under: 'controllers'
 pin 'lodash' # @4.17.21
 pin '@rails/ujs', to: '@rails--ujs.js' # @7.0.8
 pin 'sweetalert2' # @11.11.0
+pin '@rails/actioncable', to: '@rails--actioncable.js' # @7.0.8

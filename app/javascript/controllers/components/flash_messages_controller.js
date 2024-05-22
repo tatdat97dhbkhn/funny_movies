@@ -18,7 +18,7 @@ export default class extends BaseController {
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 3000
+        timer: 5000
       });
 
       Toast.fire({

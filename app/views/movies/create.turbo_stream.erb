@@ -1,1 +1,5 @@
+<% if flash.now[:success] %>
+  <%= turbo_stream.update 'movie-form', partial: 'shared/application/movie_form' %>
+<% end %>
+
 <%= render_turbo_stream_flash_messages %>
