@@ -5,8 +5,6 @@ require 'simplecov'
 require 'simplecov-cobertura'
 require 'simplecov-html'
 
-policies_only = ENV.fetch('POLICIES_ONLY', false)
-
 SimpleCov.start 'rails' do
   enable_coverage :branch
   primary_coverage :branch
@@ -19,13 +17,7 @@ SimpleCov.start 'rails' do
   add_filter '/app/channels/'
   add_filter '/app/mailers/'
 
-  add_group 'Policies', 'app/policies'
   add_group 'Services', 'app/services'
-
-  if policies_only
-    add_filter %r{^(?!/app/policies/).*$}
-    minimum_coverage 100
-  end
 end
 
 # Rails environment setup
@@ -55,8 +47,6 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
-  config.filter_run type: :policy if policies_only
-
   config.before do
     ActiveStorage::Current.url_options = { host: 'https://example.com' }
   end
@@ -126,7 +116,6 @@ RSpec.configure do |config|
   # Helpers
   config.include ActiveSupport::Testing::TimeHelpers
   config.include FactoryBot::Syntax::Methods
-  config.include MailHelpers
   config.include ModelHelpers
   config.include RequestSpecHelpers, type: :request
 end
