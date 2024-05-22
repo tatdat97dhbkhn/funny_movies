@@ -1,0 +1,4 @@
+en:
+  movies:
+    create:
+      success: 'Post success!'

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FunnyMovies</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <%= render partial: 'shared/flash_messages' %>
+    <% if devise_controller? %>
+      <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+          <%= image_tag 'logo.svg', class: 'mx-auto w-auto' %>
+        </div>
+
+        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <%= yield %>
+        </div>
+      </div>
+    <% else %>
+      <div class="h-screen overflow-y-scroll bg-white">
+        <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 md:grid-cols-2 lg:gap-8">
+          <%= render partial: 'shared/application/sidebar' %>
+          <div class="lg:col-span-2 p-4 bg-white mt-3">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </body>
+</html>
