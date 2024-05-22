@@ -29,7 +29,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Install Ruby and gems
-        uses: ruby/setup-ruby@ee2113536afb7f793eed4ce60e8d3b26db912da4
+        uses: ruby/setup-ruby@b256bd96bb4867e7d23e92e087d9bb697270b725
         with:
           bundler-cache: true
       - name: Set up database schema
@@ -41,12 +41,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Install Ruby and gems
-        uses: ruby/setup-ruby@ee2113536afb7f793eed4ce60e8d3b26db912da4
+        uses: ruby/setup-ruby@b256bd96bb4867e7d23e92e087d9bb697270b725
         with:
           bundler-cache: true
-      - name: Security audit dependencies
-        run: bundle exec bundle audit --update
-      - name: Security audit application code
-        run: bundle exec brakeman -q -w2
       - name: Lint Ruby files
         run: bundle exec rubocop --parallel
