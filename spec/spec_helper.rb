@@ -33,6 +33,8 @@ require 'webmock/rspec'
 require 'super_diff'
 require 'super_diff/rspec'
 require 'super_diff/active_support'
+require 'capybara/rails'
+require 'selenium/webdriver'
 
 # have to be required after `rspec-sidekiq` in order to avoid overwriting `enqueue_sidekiq_job` matcher
 require 'rspec/enqueue_sidekiq_job'
@@ -47,8 +49,39 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 
+Capybara.register_driver :chrome do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+  options.add_argument('--headless')
+  options.add_argument('--no-sandbox')
+  options.add_argument('--disable-dev-shm-usage')
+  options.add_argument('--window-size=1400,1400')
+
+  Capybara::Selenium::Driver.new(app,
+                                 browser: :remote,
+                                 url: ENV.fetch('SELENIUM_DRIVER_URL', nil),
+                                 options:,)
+end
+Capybara.javascript_driver = :chrome
+Capybara.always_include_port = true
+
+ActiveJob::Base.queue_adapter = :test
+
 RSpec.configure do |config|
   config.include Capybara::DSL
+
+  config.before(:each, type: :feature) do |example|
+    if example.metadata[:js]
+      WebMock.allow_net_connect!
+      Capybara.ignore_hidden_elements = false
+      Capybara.current_driver = :chrome
+
+      Capybara.app_host = "http://#{IPSocket.getaddress(Socket.gethostname)}:#{ENV.fetch('CAPYBARA_SERVER_PORT', nil)}"
+      Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
+      Capybara.server_port = ENV.fetch('CAPYBARA_SERVER_PORT', nil)
+    else
+      Capybara.current_driver = :rack_test
+    end
+  end
 
   config.before(:each, type: :request) do
     Capybara.current_driver = :rack_test

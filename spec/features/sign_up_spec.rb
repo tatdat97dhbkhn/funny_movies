@@ -77,18 +77,30 @@ describe 'Sign up' do
     end.not_to change(User, :count)
   end
 
-  # scenario 'with invalid avatar content type' do
-  #   expect do
-  #     visit new_user_registration_path
-  #     find('input[type="file"]').set(Rails.root + "spec/fixtures/files/videos/example.mp4")
-  #     # attach_file(Rails.root + "spec/fixtures/files/videos/example.mp4") do
-  #     #   binding.pry
-  #     #   find('#user_avatar').click
-  #     # end
-  #
-  #     type, messages = flash_messages
-  #     expect(type).to eq('error')
-  #     expect(messages).to include("File has an invalid content type")
-  #   end.not_to change(User, :count)
-  # end
+  it 'with invalid avatar content type', :js do
+    expect do
+      visit new_user_registration_path
+
+      attach_file(Rails.root.join('spec/fixtures/files/videos/example.mp4').to_s) do
+        click_on 'Select New Avatar'
+      end
+
+      type, messages = flash_messages
+      expect(type).to eq('error')
+      expect(messages).to include('File has an invalid content type')
+    end.not_to change(User, :count)
+  end
+
+  it 'with valid avatar' do
+    expect do
+      visit new_user_registration_path
+
+      attach_file(Rails.root.join('spec/fixtures/files/images/example.jpg').to_s) do
+        click_on 'Select New Avatar'
+      end
+
+      sign_up_with 'example@gmail.com', 'name', 'password', 'password'
+      expect(page).to have_content('Logout')
+    end.to change(User, :count).by(1)
+  end
 end

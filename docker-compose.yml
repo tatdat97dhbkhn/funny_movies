@@ -9,6 +9,7 @@ services:
       - bundle:/usr/local/bundle
     ports:
       - "3000:3000"
+      - "4000:4000"
     env_file:
       - .env
     environment:
@@ -16,6 +17,7 @@ services:
     depends_on:
       - db
       - redis
+      - selenium_chrome
     stdin_open: true
     tty: true
   db:
@@ -32,6 +34,11 @@ services:
       - "6381:6379"
     volumes:
       - redis_data:/data
+  selenium_chrome:
+    image: selenium/standalone-chrome-debug:3.141.59
+    ports:
+      - 5900:5900
+      - 4444:4444
 
 volumes:
   pg_data:

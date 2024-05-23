@@ -51,5 +51,6 @@ group :test do
   gem 'simplecov'
   gem 'simplecov-cobertura'
   gem 'super_diff'
+  gem 'webdrivers'
   gem 'webmock'
 end

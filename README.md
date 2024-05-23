@@ -1,24 +1,40 @@
-# README
+## Introduction
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The website helps people share interesting YouTube videos with each other
 
-Things you may want to cover:
+- [Prerequisites](#prerequisites)
+- [Installation & Configuration](#installation-&-configuration)
+- [Database Setup](#database-setup)
+- [Running the Application](#running-the-application)
+- [Access](#access)
+- [Usage](#usage)
 
-* Ruby version
 
-* System dependencies
+### Prerequisites
 
-* Configuration
+- [Docker](https://www.docker.com/)
 
-* Database creation
+### Installation & Configuration
 
-* Database initialization
+- Clone project: `git clone git@github.com:tatdat97dhbkhn/funny_movies.git`
+- `chmod +x entrypoint_development.sh`
+- Config ENV: `cp .env.example .env`
+- Build project: `make build`
 
-* How to run the test suite
+### Database Setup
 
-* Services (job queues, cache servers, search engines, etc.)
+- `make db-setup`
 
-* Deployment instructions
+### Running the Application
 
-* ...
+- `make dev && make debug`
+
+### Access
+
+- [http://localhost:3000/](http://localhost:3000/)
+
+### Usage
+
+- Users can watch videos shared by others without logging in
+- If you want to share videos, you must register an account
+- After registering an account, you log in to the system and start sharing videos with everyone
