@@ -12,7 +12,7 @@ class MoviesController < ApplicationController
 
     if @form.submit
       movie = current_user.movies.create(movies_params)
-      MovieBroadcastJob.perform_later(current_user, movie)
+      MovieBroadcastJob.perform_later(movie)
       flash.now[:success] = t('.success')
     else
       flash.now[:error] = @form.errors.full_messages

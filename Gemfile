@@ -43,6 +43,7 @@ end
 group :test do
   gem 'capybara'
   gem 'pundit-matchers'
+  gem 'rails-controller-testing'
   gem 'rspec-enqueue_sidekiq_job', require: false
   gem 'rspec_junit_formatter'
   gem 'rspec-sidekiq'

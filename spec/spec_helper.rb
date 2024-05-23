@@ -4,6 +4,7 @@
 require 'simplecov'
 require 'simplecov-cobertura'
 require 'simplecov-html'
+require 'capybara/rspec'
 
 SimpleCov.start 'rails' do
   enable_coverage :branch
@@ -47,12 +48,14 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
-  config.before do
-    ActiveStorage::Current.url_options = { host: 'https://example.com' }
+  config.include Capybara::DSL
+
+  config.before(:each, type: :request) do
+    Capybara.current_driver = :rack_test
   end
 
-  config.before(:suite) do
-    require Rails.root.join('db/seeds')
+  config.before do
+    ActiveStorage::Current.url_options = { host: 'https://example.com' }
   end
 
   config.define_derived_metadata do |metadata|
@@ -100,7 +103,6 @@ RSpec.configure do |config|
 
   # arbitrary gems may also be filtered via:
   config.filter_gems_from_backtrace(
-    'discard',
     'factory_bot',
     'rack',
     'railties',
@@ -117,7 +119,8 @@ RSpec.configure do |config|
   config.include ActiveSupport::Testing::TimeHelpers
   config.include FactoryBot::Syntax::Methods
   config.include ModelHelpers
-  config.include RequestSpecHelpers, type: :request
+  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include FeatureHelpers
 end
 
 RSpec::Sidekiq.configure do |config|
