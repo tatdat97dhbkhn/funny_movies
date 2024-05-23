@@ -3,7 +3,7 @@
 The website helps people share interesting YouTube videos with each other
 
 - [Prerequisites](#prerequisites)
-- [Installation & Configuration](#installation-&-configuration)
+- [Installation & Configuration](#installation--configuration)
 - [Database Setup](#database-setup)
 - [Running the Application](#running-the-application)
 - [Access](#access)
