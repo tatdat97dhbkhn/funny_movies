@@ -6,6 +6,7 @@ The website helps people share interesting YouTube videos with each other
 - [Installation & Configuration](#installation--configuration)
 - [Database Setup](#database-setup)
 - [Running the Application](#running-the-application)
+- [Running Worker](#running-worker)
 - [Access](#access)
 - [Usage](#usage)
 
@@ -28,6 +29,10 @@ The website helps people share interesting YouTube videos with each other
 ### Running the Application
 
 - `make dev && make debug`
+
+### Running Worker
+
+- `make sidekiq`
 
 ### Access
 
