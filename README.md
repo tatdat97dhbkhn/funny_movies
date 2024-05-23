@@ -9,6 +9,7 @@ The website helps people share interesting YouTube videos with each other
 - [Running Worker](#running-worker)
 - [Access](#access)
 - [Usage](#usage)
+- [Testing](#testing)
 
 
 ### Prerequisites
@@ -43,3 +44,7 @@ The website helps people share interesting YouTube videos with each other
 - Users can watch videos shared by others without logging in
 - If you want to share videos, you must register an account
 - After registering an account, you log in to the system and start sharing videos with everyone
+
+### Testing
+
+- `make rspec`

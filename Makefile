@@ -42,3 +42,6 @@ routes_grep:
 
 seed:
 	docker compose exec web bash -c "bin/rails db:seed"
+
+rspec:
+	docker compose exec web bash -c "bundle exec rspec"
