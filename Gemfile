@@ -43,6 +43,7 @@ end
 group :test do
   gem 'capybara'
   gem 'pundit-matchers'
+  gem 'rails-controller-testing'
   gem 'rspec-enqueue_sidekiq_job', require: false
   gem 'rspec_junit_formatter'
   gem 'rspec-sidekiq'
@@ -50,5 +51,6 @@ group :test do
   gem 'simplecov'
   gem 'simplecov-cobertura'
   gem 'super_diff'
+  gem 'webdrivers'
   gem 'webmock'
 end

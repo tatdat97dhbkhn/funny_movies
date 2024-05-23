@@ -18,7 +18,9 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :validatable
 
-  has_one_attached :avatar, dependent: :destroy
+  has_one_attached :avatar
 
   has_many :movies, dependent: :destroy
+
+  validates :name, presence: true
 end

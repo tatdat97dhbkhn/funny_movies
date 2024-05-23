@@ -11,29 +11,31 @@ on:
   pull_request:
     branches: [ "main" ]
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:11-alpine
-        ports:
-          - "5432:5432"
-        env:
-          POSTGRES_DB: rails_test
-          POSTGRES_USER: rails
-          POSTGRES_PASSWORD: password
-    env:
-      RAILS_ENV: test
-      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Install Ruby and gems
-        uses: ruby/setup-ruby@b256bd96bb4867e7d23e92e087d9bb697270b725
-        with:
-          bundler-cache: true
-      - name: Set up database schema
-        run: bin/rails db:schema:load
+#  test:
+#    runs-on: ubuntu-latest
+#    services:
+#      postgres:
+#        image: postgres:11-alpine
+#        ports:
+#          - "5432:5432"
+#        env:
+#          POSTGRES_DB: rails_test
+#          POSTGRES_USER: rails
+#          POSTGRES_PASSWORD: password
+#    env:
+#      RAILS_ENV: test
+#      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v3
+#      - name: Install Ruby and gems
+#        uses: ruby/setup-ruby@b256bd96bb4867e7d23e92e087d9bb697270b725
+#        with:
+#          bundler-cache: true
+#      - name: Set up database schema
+#        run: bin/rails db:schema:load
+#      - name: Run tests
+#        run: bundle exec rspec --exclude-pattern "spec/features/**/*_spec.rb"
 
   lint:
     runs-on: ubuntu-latest

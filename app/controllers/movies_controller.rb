@@ -8,14 +8,12 @@ class MoviesController < ApplicationController
   end
 
   def create
-    @form = Movies::CreateForm.new(movies_params)
-
-    if @form.submit
-      movie = current_user.movies.create(movies_params)
-      MovieBroadcastJob.perform_later(current_user, movie)
+    movie = current_user.movies.new(movies_params)
+    if movie.save
+      MovieBroadcastJob.perform_later(movie)
       flash.now[:success] = t('.success')
     else
-      flash.now[:error] = @form.errors.full_messages
+      flash.now[:error] = movie.errors.full_messages
     end
   end
 
