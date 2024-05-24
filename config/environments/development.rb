@@ -3,7 +3,7 @@
 require 'active_support/core_ext/integer/time'
 
 Rails.application.config.action_controller.default_url_options = {
-  host: 'localhost',
+  host: ENV.fetch('DEFAULT_URL_HOST', nil),
   port: ENV.fetch('DEFAULT_PORT', '3000'),
 }
 

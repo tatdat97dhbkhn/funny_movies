@@ -2,6 +2,11 @@
 
 require 'active_support/core_ext/integer/time'
 
+Rails.application.config.action_controller.default_url_options = {
+  host: ENV.fetch('DEFAULT_URL_HOST', nil),
+  protocol: 'https',
+}
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -29,7 +34,7 @@ Rails.application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fall back to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  config.assets.compile = true
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"

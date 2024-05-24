@@ -31,6 +31,7 @@ end
 
 group :development do
   gem 'annotate'
+  gem 'dockerfile-rails', '>= 1.6'
   gem 'rubocop', require: false
   gem 'rubocop-factory_bot', require: false
   gem 'rubocop-performance', require: false
