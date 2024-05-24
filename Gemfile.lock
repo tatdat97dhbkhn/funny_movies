@@ -117,6 +117,8 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.5.1)
     docile (1.4.0)
+    dockerfile-rails (1.6.13)
+      rails (>= 3.0.0)
     dotenv (3.1.2)
     dotenv-rails (3.1.2)
       dotenv (= 3.1.2)
@@ -425,6 +427,7 @@ DEPENDENCIES
   capybara
   debug
   devise
+  dockerfile-rails (>= 1.6)
   dotenv-rails
   factory_bot_rails
   faker
