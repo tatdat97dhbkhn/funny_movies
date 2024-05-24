@@ -1,5 +1,5 @@
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 list-movies"
-     data-controller="<%= current_user ? 'movies--index' : '' %>"
+     data-controller="movies--index"
      data-movies--index-sender-id-value="<%= current_user&.id %>"
 >
   <%= render partial: 'movies/movie', collection: @movies %>
